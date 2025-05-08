@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Form Solver | Fivoon</title>
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas confetti library for AI form fill animation -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <meta name="description" content="Form Solver AI automates form completion with advanced AI. Save time and increase productivity with our intelligent form automation solution.">
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full z-20 transition-all duration-300">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-blue-600 font-bold text-2xl tracking-tight flex items-center">
+                    <img src="assets/logo.png" alt="FormSolver AI Logo" class="h-8 w-8 mr-2">
+                    <span class="text-gray-700"><span class="text-blue-600">AI</span> Form Solver </span>
+                    <br>
+                    <span class="text-gray-500 text-sm ml-2 mt-2"> by <a href="https://www.fivoon.com/" class="hover:text-blue-600 ml-1 mt-2">Fivoon</a></span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold text-sm relative group">
+                    Features
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#testimonials" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold text-sm relative group">
+                    Testimonials
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#pricing" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold text-sm relative group">
+                    Pricing
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#faq" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold text-sm relative group">
+                    FAQ
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm font-bold text-white">Download Extension</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu - Updated for modern look -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-6 py-3 flex flex-col">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold py-2 border-b border-gray-50">Features</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold py-2 border-b border-gray-50">Testimonials</a>
+                <a href="#pricing" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold py-2 border-b border-gray-50">Pricing</a>
+                <a href="#faq" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-bold py-2 border-b border-gray-50">FAQ</a>
+                <div class="flex flex-col space-y-3 pt-3">
+                    <a href="#" class="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition-colors duration-300 text-center shadow-sm font-bold text-white">Download Extension</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="min-h-screen pt-32 pb-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white flex items-center">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="flex flex-col w-full md:w-1/2 justify-center items-start md:pr-10">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-10 leading-tight text-white">
+                    Get Forms Done Fast. <span class="text-white opacity-50">Save Time, Score Higher.</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-10">One click fills your form<br>No copy-paste needed.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                    <a href="https://chromewebstore.google.com/detail/form-solver-ai-auto-solve/bbfkijodpfkhikpabcdjgdjcadnjffok" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-100 transition text-center">Get web Extension</a>
+                    <a href="#demo" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg text-center">Watch Demo</a>
+                </div>
+                <div class="flex items-center mb-10">
+                    <div class="flex -space-x-2 mr-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
+                    </div>
+                    <p class="text-base">Trusted by <span class="font-bold">5,000+</span> students worldwide</p>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 hidden md:block relative">
+                <!-- Quiz Demo Form -->
+                <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50 hidden md:block"></canvas>
+                <div id="form-container" class="w-full max-w-lg mx-auto transform translate-y-8">
+                    <form id="quiz-form" class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+                        <h2 class="text-2xl font-semibold text-gray-800">Challenge Quiz</h2>
+
+                        <!-- Question 1 -->
+                        <fieldset id="q1" class="space-y-2">
+                            <legend class="text-gray-800 font-medium">1. Which mathematician proved the Taniyama–Shimura conjecture leading to Fermat's Last Theorem?</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="Wiles" class="form-radio h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Andrew Wiles</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="Deligne" class="form-radio h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Pierre Deligne</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="Ribet" class="form-radio h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Ken Ribet</span>
+                            </label>
+                        </fieldset>
+
+                        <!-- Question 2 (Multiple Answers) -->
+                        <fieldset id="q2" class="space-y-2">
+                            <legend class="text-gray-800 font-medium">2. Select all Nobel-winning discoveries:</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="q2" value="Penicillin" class="form-checkbox h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Penicillin</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="q2" value="Radioactivity" class="form-checkbox h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Radioactivity</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="q2" value="Gravity" class="form-checkbox h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Gravity</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="q2" value="Insulin" class="form-checkbox h-5 w-5 text-indigo-600">
+                                <span class="text-gray-800">Insulin</span>
+                            </label>
+                        </fieldset>
+
+                        <!-- Question 3 (Dropdown) -->
+                        <div class="space-y-2">
+                            <label for="q3" class="block text-gray-800 font-medium">3. Which element has the highest melting point?</label>
+                            <select id="q3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none text-gray-800">
+                                <option value="Carbon">Carbon (diamond)</option>
+                                <option value="Tungsten">Tungsten (W)</option>
+                                <option value="Osmium">Osmium</option>
+                            </select>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex space-x-4">
+                            <button id="ai-button" type="button" class="flex-1 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                                AI Solve
+                            </button>
+                            <button id="submit-button" type="button" class="flex-1 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition">
+                                Submit Quiz ✅
+                            </button>
+                        </div>
+
+                        <div id="result-container" class="hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Logos Section -->
+    <section class="py-12 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <p class="text-center text-gray-600 mb-8 text-lg md:text-xl"><strong>Trusted by students at leading universities</strong></p>
+
+            <div class="relative">
+                <!-- Auto-scrolling marquee container for university logos -->
+                <div class="overflow-hidden">
+                    <div class="logos-scroll flex space-x-16 items-center">
+                        <img src="assets/universities/1.png" alt="University Logo 1" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/2.png" alt="University Logo 2" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/4.png" alt="University Logo 4" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/3.png" alt="University Logo 3" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/5.png" alt="University Logo 5" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/6.png" alt="University Logo 6" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/7.png" alt="University Logo 7" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/8.png" alt="University Logo 8" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/9.png" alt="University Logo 9" class="h-16 grayscale transition-all duration-300">
+                        <img src="assets/universities/10.png" alt="University Logo 10" class="h-16 grayscale transition-all duration-300">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll" data-animation="animate-fade-in-up">
+                <span class="bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-semibold uppercase tracking-wider">Features</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4">Powerful AI Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our advanced AI solution offers a comprehensive set of features designed to make form-filling effortless and accurate.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 transition duration-300 transform hover:scale-105 hover:shadow-xl border border-gray-100 group">
+                    <div class="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <i class="fas fa-robot text-blue-600 text-2xl group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI-Powered Responses</h3>
+                    <p class="text-gray-600">Our advanced AI analyzes form questions and generates intelligent, contextually appropriate responses in seconds.</p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#" class="text-blue-600 font-medium flex items-center">
+                            Learn more
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 transition duration-300 transform hover:scale-105 hover:shadow-xl border border-gray-100 group">
+                    <div class="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <i class="fas fa-bolt text-blue-600 text-2xl group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Lightning-Fast Automation</h3>
+                    <p class="text-gray-600">Complete forms in seconds that would normally take minutes or hours, saving you valuable time.</p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#" class="text-blue-600 font-medium flex items-center">
+                            Learn more
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 transition duration-300 transform hover:scale-105 hover:shadow-xl border border-gray-100 group">
+                    <div class="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <i class="fas fa-brain text-blue-600 text-2xl group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Smart Learning</h3>
+                    <p class="text-gray-600">The AI learns from your preferences and past responses to provide increasingly personalized suggestions.</p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#" class="text-blue-600 font-medium flex items-center">
+                            Learn more
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section id="demo" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">See Form Solver AI in Action</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Watch how AI can save your time & effort</p>
+            </div>
+            <div class="max-w-5xl mx-auto">
+                <div class="flex justify-center">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/UZtHpF2lXZQ?si=Dn1_mOK8EjDkDuO5" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen
+                        class="rounded-xl shadow-lg"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Thousands of users have thanked us for their experience with AI Form Solver</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Jessica Martinez" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Jessica Martinez</h4>
+                            <p class="text-gray-600 text-sm">Political Science Major, UCLA</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"This extension is literally a lifesaver! I was drowning in weekly discussion posts and Canvas quizzes. <span class="font-bold text-black">Now I just hit the AI button and it fills</span> everything out perfectly. Saved me so much time during finals week!"</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Tyler Johnson" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Tyler Johnson</h4>
+                            <p class="text-gray-600 text-sm">Computer Science, MIT</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"As a CS student, I'm taking like 6 courses with endless surveys and assessments. This tool <span class="font-bold text-black">helped me breeze through all those</span> boring gen-ed requirements so I could focus on my actual major. Def worth the money!"</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Zoe Williams" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Zoe Williams</h4>
+                            <p class="text-gray-600 text-sm">Pre-Med, Stanford University</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Between my bio labs, MCAT prep, and volunteering at the hospital, I was stressed AF about all the busy work. <span class="font-bold text-black">Form Solver helped me</span> - especially for those random course evaluations that profs make mandatory. 10/10 recommend!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose the plan that works best for your needs <br> 1 credit solves 1 question</p>
+            </div>
+            <div class="flex flex-col lg:flex-row justify-center items-center lg:items-stretch space-y-8 lg:space-y-0 lg:space-x-8">
+                <!-- Starter Plan -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200 w-full max-w-sm flex flex-col transition transform hover:-translate-y-1 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Basic</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$10</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Perfect for individuals with occasional form-filling needs</p>
+                    <ul class="mb-8 space-y-4 flex-grow">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span><strong>100 credits</strong></span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Solves textual questions only</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Standard support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Works with Google & Microsoft Forms</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Professional Plan -->
+                <div class="bg-white rounded-lg shadow-xl p-8 border-2 border-blue-600 w-full max-w-sm flex flex-col relative transform scale-105 z-1 transition hover:-translate-y-1">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Premium</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$79</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Ideal for professionals with regular form-filling requirements</p>
+                    <ul class="mb-8 space-y-4 flex-grow">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span><strong>1000 credits</strong></span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Solves image based questions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Advanced AI responses</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="faq-question px-6 py-4">
+                        <span class="font-semibold">How accurate are the AI-generated responses?</span>
+                    </div>
+                    <div class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600">Our AI is trained on a vast dataset to provide contextually appropriate responses. The system achieves over 95% accuracy for most general form questions.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="faq-question px-6 py-4">
+                        <span class="font-semibold">Is my data secure when using Form Solver AI?</span>
+                    </div>
+                    <div class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600">Yes, security is our top priority. All data is encrypted both in transit and at rest. We never share your information with third parties, and you can delete your data at any time.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="faq-question px-6 py-4">
+                        <span class="font-semibold">What types of forms does Form Solver AI work with?</span>
+                    </div>
+                    <div class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600">Form Solver AI works with most major form platforms including Google Forms, Microsoft Forms, Typeform, SurveyMonkey, JotForm, and many others.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="faq-question px-6 py-4">
+                        <span class="font-semibold">What happens if I use all my monthly credits?</span>
+                    </div> 
+                    <div class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600">If you use all your monthly credits, you can wait until the next billing cycle, upgrade to a higher plan, or purchase additional credit packs from your dashboard.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="faq-question px-6 py-4">
+                        <span class="font-semibold">Can I customize the AI responses?</span>
+                    </div>
+                    <div class="faq-answer px-6 pb-4">
+                        <p class="text-gray-600">Yes, you have full control over the responses before submission. You can review and edit all AI-generated answers. Premium plans offer additional customization options.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Still wasting time on boooring Form Filling?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of happy users who have increased their productivity<br> with AI Form Solver</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://chromewebstore.google.com/detail/form-solver-ai-auto-solve/bbfkijodpfkhikpabcdjgdjcadnjffok" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-100 transition">Get Started Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="text-white font-bold text-2xl flex items-center">
+                        <img src="assets/logo.png" alt="FormSolver AI Logo" class="h-8 w-8 mr-2">
+                        <span><span class="text-blue-500">AI</span> Form Solver</span>
+                    </a>
+                    <span>Powered by <a href="https://www.fivoon.com/" class="hover:text-blue-600">Fivoon</a></span>
+                    <p class="mt-4 text-gray-400">Revolutionizing form automation with advanced artificial intelligence.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://youtu.be/UZtHpF2lXZQ" class="text-gray-400 hover:text-white transition">How to use?</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="/refund" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 Form Solver AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Initialize FAQ accordion directly in HTML to ensure it works even if main.js has issues
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force FAQ to be closed initially
+            document.querySelectorAll('.faq-answer').forEach(function(answer) {
+                answer.classList.remove('active');
+            });
+            
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(function(question) {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    
+                    // Toggle active class for CSS transitions
+                    const isActive = answer.classList.contains('active');
+                    
+                    // If it's already active, close it. Otherwise, open it.
+                    if (isActive) {
+                        answer.classList.remove('active');
+                        if (icon) {
+                            icon.classList.remove('rotate-180');
+                        }
+                    } else {
+                        // Close all other FAQ items first (accordion behavior)
+                        faqQuestions.forEach(function(otherQuestion) {
+                            if (otherQuestion !== question) {
+                                const otherAnswer = otherQuestion.nextElementSibling;
+                                const otherIcon = otherQuestion.querySelector('.faq-icon');
+                                
+                                if (otherAnswer) {
+                                    otherAnswer.classList.remove('active');
+                                }
+                                if (otherIcon) {
+                                    otherIcon.classList.remove('rotate-180');
+                                }
+                            }
+                        });
+                        
+                        // Then open this one
+                        answer.classList.add('active');
+                        if (icon) {
+                            icon.classList.add('rotate-180');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
